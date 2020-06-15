@@ -21,8 +21,8 @@ if($_GET['item'])
 	//--------------------Query-------------------
 	$action="update";
 	$cols="*";
-	$table="users";
-	$where="id_usuario = ".$_GET["item"];
+	$table="profiles";
+	$where="id_profile = ".$_GET["item"];
 	$result=query($table,$cols,$where,false);
 	if($result)
 		$itemEdit=$result[0];
@@ -129,7 +129,7 @@ if($alert)
 			<br>
 			
 			<input type="hidden" id="action" name="action" value="<?=$action?>" /> 
-			<input type="hidden" name="id_elemento" id="id_elemento" value="<?=$itemEdit["id_usuario"]?>">
+			<input type="hidden" name="id_elemento" id="id_elemento" value="<?=$itemEdit["id_profile"]?>">
 			<!--Aqui se almacena el ID del elemento que se este modificando-->
 		</form>
 	   </div>
@@ -178,7 +178,7 @@ $result=query($table,$cols,$where,false);
 							<td class="text-center"><?=$res["name"]?></td>
 							<td class="text-center"><?=$res["description"]?></td>
 							<td class="text-center">
-								<a href="?section=users&module=admin_user&item=<?=$res["id_usuario"]?>" >
+								<a href="?section=users&module=admin_user&item=<?=$res["id_profile"]?>" >
 									<input type="button" value="Editar" class="btn btn-primary btn-xs" />									
 								</a>
 								<?php
