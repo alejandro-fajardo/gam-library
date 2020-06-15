@@ -1,0 +1,9 @@
+CREATE TABLE `profiles` (
+	`id_profile` INT(11) NOT NULL,
+	`name` VARCHAR(250) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`description` VARCHAR(250) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`id_profile`) USING BTREE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;

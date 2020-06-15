@@ -142,7 +142,7 @@ if($alert)
  <div class="box box-success">
    <div class="box-header with-border">
 	 <h3 style="margin:5px !important">
-       <i class="fa fa-external-link"></i>  Usuario
+       <i class="fa fa-external-link"></i>  Perfil
      </h3>
      <div class="box-tools pull-right">
        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -156,29 +156,16 @@ if($alert)
 			<div class="form-group">
 				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Nombre</label>
 				<div class="col-lg-8">
-					<input type="text" required="required" id="name" name="name" value="<?=$itemEdit["nombre_completo"]?>" class="form-control">
+					<input type="text" required="required" id="name" name="name" value="<?=$itemEdit["name"]?>" class="form-control">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Usuario</label>
+				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Descripción</label>
 				<div class="col-lg-8">
-					<input type="text" required="required" id="user" name="user" value="<?=$itemEdit["usuario"]?>" class="form-control">
+					<input type="text" required="required" id="description" name="description" value="<?=$itemEdit["description"]?>" class="form-control">
 				</div>
 			</div>
-
-			<?php
-			if(!isset($_GET['item'])){
-			?>
-				<div class="form-group" >
-					<label class="col-lg-2 col-sm-2 control-label" for="asunto">Contraseña</label>
-					<div class="col-lg-8">
-						<input type="password" required="required" id="password" name="password" value="<?=$itemEdit["name_trivia"]?>" class="form-control">
-					</div>
-				</div>
-			<?php
-			}
-			?>
 
 			<br>
 			<div class="text-center">
@@ -198,16 +185,16 @@ if($alert)
 <!---------------------------------------------------------------- LISTADO ----------------------------------------------------->
 <?php
 //--------------------Query-------------------
-$id="id_usuario";
+$id="id_profile";
 $cols="*";
-$table="users";
-$where="1 ORDER BY nombre_completo ASC";
+$table="profiles";
+$where="1 ORDER BY name ASC";
 $result=query($table,$cols,$where,false);
 ?>
 <div class="box box-warning">
    <div class="box-header with-border">     
      <h3 style="margin:5px !important">
-       <i class="fa fa-list"></i>  Trivias
+       <i class="fa fa-list"></i>  Perfiles
      </h3>
      <div class="box-tools pull-right">
        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>

@@ -207,7 +207,7 @@ $result=query($table,$cols,$where,false);
 <div class="box box-warning">
    <div class="box-header with-border">     
      <h3 style="margin:5px !important">
-       <i class="fa fa-list"></i>  Trivias
+       <i class="fa fa-list"></i>  Usuarios
      </h3>
      <div class="box-tools pull-right">
        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
