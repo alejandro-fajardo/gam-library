@@ -68,6 +68,23 @@ INSERT INTO `gen_departamentos` (`id_departamento`, `nombre_dep`) VALUES
 	(21, 'Valle del Cauca');
 /*!40000 ALTER TABLE `gen_departamentos` ENABLE KEYS */;
 
+-- Volcando estructura para tabla gam-library.profiles
+DROP TABLE IF EXISTS `profiles`;
+CREATE TABLE IF NOT EXISTS `profiles` (
+  `id_profile` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id_profile`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla gam-library.profiles: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` (`id_profile`, `name`, `description`) VALUES
+	(1, 'Administrador', 'Administrador del sistema'),
+	(2, 'Bibliotecario', 'Bibliotecario'),
+	(3, 'Usuario', 'Usuario');
+/*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
+
 -- Volcando estructura para tabla gam-library.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
