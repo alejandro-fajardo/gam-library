@@ -2,11 +2,8 @@
 function connect()
 {
     //Local
-    $ms = new mysqli('mysql', 'root', 'root', 'gam');
+    $ms = new mysqli('localhost', 'root', '', 'gam-library');
     $ms->set_charset("utf8");
-    //Production
-    // $ms = new mysqli('localhost', 'uqaacefzau', 'JPSrUmgRK9', 'uqaacefzau');
-    // $ms->set_charset("utf8");
     return $ms;
 }
 
