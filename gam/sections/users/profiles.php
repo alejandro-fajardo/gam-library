@@ -30,10 +30,10 @@ if($_GET['item'])
 
 if($_POST['action']=='update')
 {
-	$cadena  = "nombre_completo='".$_POST["name"]."',usuario='".$_POST["user"]."'";
-	$where   = "id_usuario = '".$_POST["id_elemento"]."'";
+	$cadena  = "name='".$_POST["name"]."',description='".$_POST["description"]."'";
+	$where   = "id_profile = '".$_POST["id_elemento"]."'";
 	$alert= true;
-	if(update("users",$cadena,$where,0)){
+	if(update("profiles",$cadena,$where,0)){
 		$type="success";
 		$message = "Registro actualizado correctamente";
 	}
@@ -178,7 +178,7 @@ $result=query($table,$cols,$where,false);
 							<td class="text-center"><?=$res["name"]?></td>
 							<td class="text-center"><?=$res["description"]?></td>
 							<td class="text-center">
-								<a href="?section=users&module=admin_user&item=<?=$res["id_profile"]?>" >
+								<a href="?section=users&module=profiles&item=<?=$res["id_profile"]?>" >
 									<input type="button" value="Editar" class="btn btn-primary btn-xs" />									
 								</a>
 								<?php
