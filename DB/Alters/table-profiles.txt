@@ -7,3 +7,6 @@ CREATE TABLE `profiles` (
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB
 ;
+
+ALTER TABLE `profiles`
+	CHANGE COLUMN `id_profile` `id_profile` INT(11) NOT NULL AUTO_INCREMENT FIRST;
