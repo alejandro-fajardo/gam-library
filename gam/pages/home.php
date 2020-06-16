@@ -1,4 +1,8 @@
- <?php
+<!-- js -->
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/Master.js"></script>
+
+<?php
  if($_GET["logout"]==="true")
  {  
      logout();
@@ -99,10 +103,16 @@
             <li><a href="?section=users&module=admin_user">Usuarios</a></li>
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>
+          
           <ul class="treeview-menu">
             <li><a href="?section=users&module=profiles">Perfiles</a></li>
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>
+
+          <ul class="treeview-menu">
+            <li><a href="#" onclick="VerLibros()">Ver Libros</a></li>
+          </ul>
+
         </li>
       </ul>
       <!-- /.sidebar-menu -->
@@ -111,7 +121,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="container_info">
 
     <?php
     if($section!==null&&$module!==null)
