@@ -112,6 +112,10 @@
           <ul class="treeview-menu">
             <li><a href="#" onclick="VerLibros()">Ver Libros</a></li>
           </ul>
+          <ul class="treeview-menu">
+            <li><a href="?section=users&module=categories">Categorias</a></li>
+            <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
+          </ul>z
 
         </li>
       </ul>
