@@ -104,7 +104,7 @@
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>
           
-          <ul class="treeview-menu">
+          <ul class="treeview-menu">git
             <li><a href="?section=users&module=profiles">Perfiles</a></li>
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>
@@ -113,7 +113,7 @@
             <li><a href="#" onclick="VerLibros()">Ver Libros</a></li>
           </ul>
           <ul class="treeview-menu">
-            <li><a href="?section=users&module=categories">Categorias</a></li>
+            <li><a href="?section=categorias&module=categories">Categorias</a></li>
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>z
 

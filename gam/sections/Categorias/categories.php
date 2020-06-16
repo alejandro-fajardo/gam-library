@@ -71,7 +71,7 @@ if($_POST['action']=='update')
 <section class="content-header">
     <h1>   
       Categorias de Libros
-      <small>usuarios</small>
+      <small>Libros</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href=""><i class="fa fa-dashboard"></i>Inicio</a></li>
