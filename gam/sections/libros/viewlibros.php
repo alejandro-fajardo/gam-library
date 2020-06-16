@@ -19,7 +19,6 @@ $Objetc=query($tabla,$campos,$where,true);
 
 ?>
 <h2> Libros </h2>
-<!-- ADD LIBRO -->
 <table id="generalDataTable" class="table table-bordered table-striped">
 	       <thead>
 	         <tr>
@@ -36,9 +35,9 @@ $Objetc=query($tabla,$campos,$where,true);
 					foreach ($Objetc as $Obj) {
 					?>
 						<tr>
-							<td class="text-center"><?=$Obj["libro_name"]?></td>
-							<td class="text-center"><?=$res["autor_name"]?></td>
-                            <td class="text-center"><?=$Obj["editorial_name"]?></td>
+							<td class="text-center"><?php echo $Obj["libro_name"]?></td>
+							<td class="text-center"><?php echo $res["autor_name"]?></td>
+                            <td class="text-center"><?php echo $Obj["editorial_name"]?></td>
                             <td class="text-center"> <a href="#">Actualizar </a> | <a href="#">Eliminar </a> </td>
 						</tr>
 					<?php
