@@ -124,7 +124,7 @@ if($alert)
 
 			<br>
 			<div class="text-center">
-				<input type="submit" class="btn btn-primary" value="Guardar" name="crear" onclick="asignarAccion('crear');" />
+				<input type="submit" class="btn btn-primary" value="Buscar" name="Buscar" onclick="asignarAccion('crear');" />
 			</div>
 			<br>
 			
