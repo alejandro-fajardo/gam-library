@@ -103,19 +103,30 @@
             <li><a href="?section=users&module=admin_user">Usuarios</a></li>
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>
-          
-          <ul class="treeview-menu">git
+          <ul class="treeview-menu">
             <li><a href="?section=users&module=profiles">Perfiles</a></li>
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>
+        </li>
+      </ul>
+      <ul class="sidebar-menu">
+        <!-- Optionally, you can add icons to the links -->
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Libros</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
 
           <ul class="treeview-menu">
-            <li><a href="#" onclick="VerLibros()">Ver Libros</a></li>
+            <li><a href="?section=libros&module=viewlibros">Ver Libros</a></li>
+             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
           </ul>
+
           <ul class="treeview-menu">
             <li><a href="?section=categorias&module=categories">Categorias</a></li>
             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
-          </ul>z
+          </ul>
 
         </li>
       </ul>
