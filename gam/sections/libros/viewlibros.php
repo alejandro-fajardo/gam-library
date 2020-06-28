@@ -225,6 +225,7 @@ $result=query($table,$cols,$where,false);
 				<td class="text-center"><b>Autor</b></td>
 				<td class="text-center"><b>Editorial</b></td>
 				<td class="text-center"><b>Estado</b></td>
+				<td class="text-center"><b>Disponibilidad</b></td>
 				<td class="text-center"><b>Acciones</b></td>
 			 </tr>
 	       </thead>
@@ -254,6 +255,22 @@ $result=query($table,$cols,$where,false);
 							<?php	
 							}
 							?>
+
+							<?php
+							if($res["status_lend"]==1)
+							{
+							?>
+								<td class="text-center"><font color="red">Prestado</font></td>
+							<?php
+							}
+							else
+							{
+							?>
+								<td class="text-center"><font color="green">Disponible</font></td>
+							<?php	
+							}
+							?>
+
 							<td class="text-center">
 								<a href="?section=libros&module=viewlibros&item=<?=$res["libro_id"]?>" >
 									<input type="button" value="Editar" class="btn btn-primary btn-xs" />									
