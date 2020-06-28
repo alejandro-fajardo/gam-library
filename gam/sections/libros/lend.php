@@ -1,20 +1,5 @@
 <?php
 $action="create";
-if($_POST['action']=='create'){
-
-	$password = encrypt($_POST["password"]);
-	$campos  = "libro_name,autor_name,editorial_name,genero_lib";
-	$valores = "'$_POST[nombre_li]','$_POST[autor_li]','$_POST[editorial_li]','$_POST[gener_li]'";
-	$alert=true;
-	if(add("libros",$campos,$valores,false)){
-		$type="success";
-		$message = "Registro guardado correctamente";
-	}
-	else{
-		$type="danger";
-		$message = "Error al guardar el registro";
-	}
-}
 if($_POST['accionEdit']=='desactivar')
 {
 	$cadena  = "estado=0";
@@ -42,35 +27,6 @@ if($_POST['accionEdit']=='activar')
 		$type="danger";
 		$message = "Error al guardar el registro";
 	}
-}
-if($_POST['action']=='edit')
-{
-	$campos  = "name,date_ini,date_end";
-	$valores = "'$_POST[name]','$_POST[date_ini]','$_POST[date_end]'";
-	$alert=true;
-	if(add("trivias",$campos,$valores,0)){
-		$type="success";
-		$message = "Registro guardado correctamente";
-	}
-	else{
-		$type="danger";
-		$message = "Error al guardar el registro";
-	}
-	$action="update";
-}
-
-
-$itemEdit = array();
-if($_GET['item'])
-{
-	//--------------------Query-------------------
-	$action="update";
-	$cols="*";
-	$table="libros";
-	$where="libro_id = ".$_GET["item"];
-	$result=query($table,$cols,$where,false);
-	if($result)
-		$itemEdit=$result[0];
 }
 
 if($_POST['action']=='update')
@@ -184,7 +140,7 @@ $result=query($table,$cols,$where,false);
 
 						
 							<td class="text-center">
-								<a href="?section=libros&module=viewlibros&item=<?=$res["libro_id"]?>" >
+								<a href="?section=libros&module=lend&item=<?=$res["libro_id"]?>" >
                                 <input type="button" name="activar" id="activar" value="Solicitar prestado" class="btn btn-success btn-xs" onclick="asignarAccion1('activar',<?=$res['libro_id']?>)"/> 
 								</a>
 																							
