@@ -2,12 +2,20 @@
 $action="create";
 if($_POST['accionEdit']=='desactivar')
 {
-	$cadena  = "estado=0";
+	$cadena  = "status_lend=0";
 	$where   = "libro_id = '".$_POST["idElemento"]."'";
 	$alert= true;
 	if(update("libros",$cadena,$where,false)){
-		$type="success";
-		$message = "Registro actualizado correctamente";
+		$id_user = $_SESSION["userLog"]["id_usuario"];
+		$where = "id_user = '$id_user' AND id_book='$_POST[idElemento]'";
+		if(delete("users_books",$where,false)){
+			$type="success";
+			$message = "Libro devuelto corrctamente";
+		}
+		else{
+			$type="danger";
+			$message = "Error al guardar el registro";
+		}
 	}
 	else{
 		$type="danger";
@@ -16,12 +24,21 @@ if($_POST['accionEdit']=='desactivar')
 }
 if($_POST['accionEdit']=='activar')
 {	
-	$cadena  = "estado=1";
+	$cadena  = "status_lend=1";
 	$where   = "libro_id = '".$_POST["idElemento"]."'";
 	$alert= true;
-	if(update("libros",$cadena,$where,0)){
-		$type="success";
-		$message = "Registro actualizado correctamente";
+	if(update("libros",$cadena,$where,false)){
+		$campos  = "id_book,id_user";
+		$id_user = $_SESSION["userLog"]["id_usuario"];
+		$valores = "'$_POST[idElemento]','$id_user'";
+		if(add("users_books",$campos,$valores,false)){
+			$type="success";
+			$message = "Prestamos hecho correctamente";
+		}
+		else{
+			$type="danger";
+			$message = "Error al guardar el registro";
+		}
 	}
 	else{
 		$type="danger";
@@ -99,7 +116,7 @@ if($alert)
 $id="libros_id";
 $cols="*";
 $table="libros";
-$where="1 ORDER BY libro_name ASC";
+$where="1 AND status_lend= 0 AND estado = 1 ORDER BY libro_name ASC";
 $result=query($table,$cols,$where,false);
 ?>
 <div class="box box-warning">
@@ -140,10 +157,8 @@ $result=query($table,$cols,$where,false);
 
 						
 							<td class="text-center">
-								<a href="?section=libros&module=lend&item=<?=$res["libro_id"]?>" >
                                 <input type="button" name="activar" id="activar" value="Solicitar prestado" class="btn btn-success btn-xs" onclick="asignarAccion1('activar',<?=$res['libro_id']?>)"/> 
-								</a>
-																							
+																		
 							</td>
 						</tr>
 					<?php
@@ -164,10 +179,11 @@ $result=query($table,$cols,$where,false);
 <!---------------------------------------------------------------- LISTADO ----------------------------------------------------->
 <?php
 //--------------------Query-------------------
+$userid = $_SESSION["userLog"]["id_usuario"];
 $id="libros_id";
 $cols="*";
-$table="libros";
-$where="1 ORDER BY libro_name ASC";
+$table="libros RIGHT JOIN users_books ON id_book = libro_id";
+$where="1 AND id_user = $userid ORDER BY libro_name ASC";
 $result=query($table,$cols,$where,false);
 ?>
 <div class="box box-warning">
@@ -183,7 +199,7 @@ $result=query($table,$cols,$where,false);
    <div class="box-body"> 
    <br><br> 
     <div style="overflow-x:scroll">
-	    <form name="forma1" method="post" action="">
+	    <form name="forma2" method="post" action="">
 	     <table id="generalDataTable" class="table table-bordered table-striped">
 	       <thead>
 	         <tr>
@@ -191,7 +207,6 @@ $result=query($table,$cols,$where,false);
 				<td class="text-center"><b>Nombre</b></td>
 				<td class="text-center"><b>Autor</b></td>
 				<td class="text-center"><b>Editorial</b></td>
-				<td class="text-center"><b>Estado</b></td>
 				<td class="text-center"><b>Acciones</b></td>
 			 </tr>
 	       </thead>
@@ -207,38 +222,9 @@ $result=query($table,$cols,$where,false);
 							<td class="text-center"><?=$res["autor_name"]?></td>
 							<td class="text-center"><?=$res["editorial_name"]?></td>
 
-							<?php
-							if($res["estado"]==0)
-							{
-							?>
-								<td class="text-center"><font color="red">Inactivo</font></td>
-							<?php
-							}
-							else
-							{
-							?>
-								<td class="text-center"><font color="green">Activo</font></td>
-							<?php	
-							}
-							?>
+
 							<td class="text-center">
-								<a href="?section=libros&module=viewlibros&item=<?=$res["libro_id"]?>" >
-									<input type="button" value="Editar" class="btn btn-primary btn-xs" />									
-								</a>
-								<?php
-								if($res["estado"]==0)
-								{
-								?>
-									<input type="button" name="activar" id="activar" value="Activar" class="btn btn-success btn-xs" onclick="asignarAccion1('activar',<?=$res['libro_id']?>)"/> 
-								<?php	
-								}
-								else
-								{
-								?>
-									<input type="button" name="desactivar" id="desactivar" value="Desactivar" class="btn btn-danger btn-xs" onclick="asignarAccion1('desactivar',<?=$res['libro_id']?>)" />
-								<?php	
-								}
-								?>																	
+								<input type="button" name="desactivar" id="desactivar" value="Devolver" class="btn btn-danger btn-xs" onclick="asignarAccion1('desactivar',<?=$res['libro_id']?>)" />																
 							</td>
 						</tr>
 					<?php
@@ -247,9 +233,9 @@ $result=query($table,$cols,$where,false);
 		   ?>
 	       </tbody>
 	     </table>
-	     <input type="hidden" id="accionEdit" name="accionEdit" />
-	     <input type="hidden" id="filtro" name="filtro" />
-		 <input type="hidden" id="idElemento" name="idElemento" />
+	     <input type="hidden" id="accionEdit2" name="accionEdit2" />
+	     <input type="hidden" id="filtro2" name="filtro2" />
+		 <input type="hidden" id="idElemento2" name="idElemento2" />
 		</form><!-- Form -->
 		<br>
 	</div><!-- Scroll -->
