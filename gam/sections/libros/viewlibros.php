@@ -1,12 +1,12 @@
 <?php
 $action="create";
-if($_POST['action']=='create')
-{
+if($_POST['action']=='create'){
+
 	$password = encrypt($_POST["password"]);
-	$campos  = "libro_name,autor_name,editorial_name";
-	$valores = "'$_POST[name]','$_POST[user]','$password'";
+	$campos  = "libro_name,autor_name,editorial_name,genero_lib";
+	$valores = "'$_POST[nombre_li]','$_POST[autor_li]','$_POST[editorial_li]','$_POST[gener_li]'";
 	$alert=true;
-	if(add("libros",$campos,$valores,0)){
+	if(add("libros",$campos,$valores,false)){
 		$type="success";
 		$message = "Registro guardado correctamente";
 	}
@@ -18,9 +18,9 @@ if($_POST['action']=='create')
 if($_POST['accionEdit']=='desactivar')
 {
 	$cadena  = "estado=0";
-	$where   = "id_trivia = '".$_POST["idElemento"]."'";
+	$where   = "libro_id = '".$_POST["idElemento"]."'";
 	$alert= true;
-	if(update("trivias",$cadena,$where,false)){
+	if(update("libros",$cadena,$where,false)){
 		$type="success";
 		$message = "Registro actualizado correctamente";
 	}
@@ -32,9 +32,9 @@ if($_POST['accionEdit']=='desactivar')
 if($_POST['accionEdit']=='activar')
 {	
 	$cadena  = "estado=1";
-	$where   = "id_trivia = '".$_POST["idElemento"]."'";
+	$where   = "libro_id = '".$_POST["idElemento"]."'";
 	$alert= true;
-	if(update("trivias",$cadena,$where,0)){
+	if(update("libros",$cadena,$where,0)){
 		$type="success";
 		$message = "Registro actualizado correctamente";
 	}
@@ -66,8 +66,8 @@ if($_GET['item'])
 	//--------------------Query-------------------
 	$action="update";
 	$cols="*";
-	$table="users";
-	$where="id_usuario = ".$_GET["item"];
+	$table="libros";
+	$where="libro_id = ".$_GET["item"];
 	$result=query($table,$cols,$where,false);
 	if($result)
 		$itemEdit=$result[0];
@@ -75,10 +75,10 @@ if($_GET['item'])
 
 if($_POST['action']=='update')
 {
-	$cadena  = "nombre_completo='".$_POST["name"]."',usuario='".$_POST["user"]."'";
-	$where   = "id_usuario = '".$_POST["id_elemento"]."'";
+	$cadena  = "libro_name='".$_POST["nombre_li"]."',autor_name='".$_POST["autor_li"]."',editorial_name='".$_POST["editorial_li"]."',genero_lib='".$_POST["gener_li"]."'";
+	$where   = "libro_id = '".$_POST["id_elemento"]."'";
 	$alert= true;
-	if(update("users",$cadena,$where,0)){
+	if(update("libros",$cadena,$where,false)){
 		$type="success";
 		$message = "Registro actualizado correctamente";
 	}
@@ -156,27 +156,27 @@ if($alert)
 		    <div class="form-group">
 				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Genero Literario</label>
 				<div class="col-lg-8">
-					<input type="text" required="required" id="gener_li" name="gener_li" value="<?=$itemEdit["generoli"]?>" class="form-control">
+					<input type="text" required="required" id="gener_li" name="gener_li" value="<?=$itemEdit["genero_lib"]?>" class="form-control">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Nombre</label>
 				<div class="col-lg-8">
-					<input type="text" required="required" id="nombre_li" name="nombre_li" value="<?=$itemEdit["nombreli"]?>" class="form-control">
+					<input type="text" required="required" id="nombre_li" name="nombre_li" value="<?=$itemEdit["libro_name"]?>" class="form-control">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Autor</label>
 				<div class="col-lg-8">
-					<input type="text" required="required" id="autor_li" name="autor_li" value="<?=$itemEdit["autorli"]?>" class="form-control">
+					<input type="text" required="required" id="autor_li" name="autor_li" value="<?=$itemEdit["autor_name"]?>" class="form-control">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Editorial</label>
 				<div class="col-lg-8">
-					<input type="text" required="required" id="editorial_li" name="editorial_li" value="<?=$itemEdit["autorli"]?>" class="form-control">
+					<input type="text" required="required" id="editorial_li" name="editorial_li" value="<?=$itemEdit["editorial_name"]?>" class="form-control">
 				</div>
 			</div>
 			<br>
@@ -186,7 +186,7 @@ if($alert)
 			<br>
 			
 			<input type="hidden" id="action" name="action" value="<?=$action?>" /> 
-			<input type="hidden" name="id_elemento" id="id_elemento" value="<?=$itemEdit["id_libro"]?>">
+			<input type="hidden" name="id_elemento" id="id_elemento" value="<?=$itemEdit["libro_id"]?>">
 			<!--Aqui se almacena el ID del elemento que se este modificando-->
 		</form>
 	   </div>
@@ -255,20 +255,20 @@ $result=query($table,$cols,$where,false);
 							}
 							?>
 							<td class="text-center">
-								<a href="?section=users&module=admin_user&item=<?=$res["id_usuario"]?>" >
+								<a href="?section=libros&module=viewlibros&item=<?=$res["libro_id"]?>" >
 									<input type="button" value="Editar" class="btn btn-primary btn-xs" />									
 								</a>
 								<?php
 								if($res["estado"]==0)
 								{
 								?>
-									<input type="button" name="activar" id="activar" value="Activar" class="btn btn-success btn-xs" onclick="asignarAccion1('activar',<?=$res['id_trivia']?>)"/> 
+									<input type="button" name="activar" id="activar" value="Activar" class="btn btn-success btn-xs" onclick="asignarAccion1('activar',<?=$res['libro_id']?>)"/> 
 								<?php	
 								}
 								else
 								{
 								?>
-									<input type="button" name="desactivar" id="desactivar" value="Desactivar" class="btn btn-danger btn-xs" onclick="asignarAccion1('desactivar',<?=$res['id_trivia']?>)" />
+									<input type="button" name="desactivar" id="desactivar" value="Desactivar" class="btn btn-danger btn-xs" onclick="asignarAccion1('desactivar',<?=$res['libro_id']?>)" />
 								<?php	
 								}
 								?>																	
