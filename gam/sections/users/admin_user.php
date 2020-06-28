@@ -3,8 +3,8 @@ $action="create";
 if($_POST['action']=='create')
 {
 	$password = encrypt($_POST["password"]);
-	$campos  = "nombre_completo,usuario,password";
-	$valores = "'$_POST[name]','$_POST[user]','$password'";
+	$campos  = "nombre_completo,usuario,password,idrol";
+	$valores = "'$_POST[name]','$_POST[user]','$password','$_POST[idrol]'";
 	$alert=true;
 	if(add("users",$campos,$valores,0)){
 		$type="success";
@@ -166,6 +166,22 @@ if($alert)
 					<input type="text" required="required" id="user" name="user" value="<?=$itemEdit["usuario"]?>" class="form-control">
 				</div>
 			</div>
+
+			<?php
+			if(!isset($_GET['item'])){
+			?>
+				<div class="form-group" >
+					<label class="col-lg-2 col-sm-2 control-label" for="asunto">Perfil</label>
+					<div class="col-lg-8">
+						<select class="form-control" name="idrol" id="idrol">
+							<option value="1">Administrador</option>
+							<option value="2">Usuario</option>
+						</select>
+					</div>
+				</div>
+			<?php
+			}
+			?>
 
 			<?php
 			if(!isset($_GET['item'])){

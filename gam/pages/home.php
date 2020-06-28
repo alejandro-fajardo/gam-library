@@ -43,7 +43,7 @@
               <!-- The user image in the navbar-->
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Administrador</span>
+              <span class="hidden-xs"><?=$_SESSION["userLog"]["nombre_completo"]?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -65,7 +65,7 @@
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a ><i class="fa fa-gears"></i></a>
+          <a href="?logout=true" class="btn btn-default btn-flat">Salir</a>
           </li>
         </ul>
       </div>
@@ -83,53 +83,71 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?=$_SESSION["userLog"]["nombre_completo"]?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu">
-        <li class="header">Menu</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Usuarios</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="?section=users&module=admin_user">Usuarios</a></li>
-            <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
-          </ul>
-          <ul class="treeview-menu">    
-            <li><a href="?section=users&module=profiles">Perfiles</a></li>
-            <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
-          </ul>
-        </li>
-      </ul>
-      <ul class="sidebar-menu">
-        <!-- Optionally, you can add icons to the links -->
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Libros</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
+  
+      <?php
+        if($_SESSION["userLog"]["idrol"]==1){
+          ?>
 
-          <ul class="treeview-menu">
-            <li><a href="?section=libros&module=viewlibros">Ver Libros</a></li>
-             <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header">Menu</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li class="treeview">
+              <a href="#"><i class="fa fa-link"></i> <span>Usuarios</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="?section=users&module=admin_user">Usuarios</a></li>
+              </ul>
+              <!-- <ul class="treeview-menu">    
+                <li><a href="?section=users&module=profiles">Perfiles</a></li>
+              </ul> -->
+            </li>
           </ul>
-
-          <ul class="treeview-menu">
-            <li><a href="?section=categorias&module=categories">Categorias</a></li>
-            <!-- <li><a href="?section=trivia&module=results">Resultados</a></li> -->
+          <ul class="sidebar-menu">
+            <li class="treeview">
+              <a href="#"><i class="fa fa-link"></i> <span>Libros</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="?section=libros&module=viewlibros">Libros</a></li>
+              </ul>
+            </li>
           </ul>
 
-        </li>
-      </ul>
+          <?php
+        }
+      ?>
+
+      <?php
+        if($_SESSION["userLog"]["idrol"]==2){
+          ?>
+           <ul class="sidebar-menu">
+              <li class="treeview">
+                <a href="#"><i class="fa fa-link"></i> <span>Prestamos </span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="?section=libros&module=lend">Prestamo</a></li>
+                </ul>
+              </li>
+            </ul>
+          <?php
+        }
+      ?>
+  
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
