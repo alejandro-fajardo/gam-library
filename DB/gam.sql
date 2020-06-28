@@ -68,6 +68,29 @@ INSERT INTO `gen_departamentos` (`id_departamento`, `nombre_dep`) VALUES
 	(21, 'Valle del Cauca');
 /*!40000 ALTER TABLE `gen_departamentos` ENABLE KEYS */;
 
+-- Volcando estructura para tabla gam-library.libros
+DROP TABLE IF EXISTS `libros`;
+CREATE TABLE IF NOT EXISTS `libros` (
+  `libro_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status_lend` int(11) NOT NULL DEFAULT 0 COMMENT '0) Libre 1) Prestado',
+  `libro_name` varchar(250) DEFAULT '0',
+  `autor_name` varchar(250) DEFAULT '0',
+  `editorial_name` varchar(250) DEFAULT '0',
+  `genero_lib` varchar(200) DEFAULT '0',
+  `estado` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`libro_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla gam-library.libros: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `libros` DISABLE KEYS */;
+INSERT INTO `libros` (`libro_id`, `status_lend`, `libro_name`, `autor_name`, `editorial_name`, `genero_lib`, `estado`) VALUES
+	(1, 0, 'el perfume', 'Patrick Süskind', 'Diogenes Verlag', 'Novela', 1),
+	(25, 0, 'Juego de tronos', 'Geroge R.R Martin', 'Books Life', 'Fantasia', 1),
+	(26, 1, 'El codigo davinci', 'Dawn Brow', 'Books Life', 'Novela de misterio', 1),
+	(27, 1, 'Cien años de soledad', 'Gabriel Garcia Marquez', 'Books Life', 'Novela', 1),
+	(28, 0, 'Crónicas marcianad', 'Ray Bradbury', 'Books Life', 'Ciencia ficción', 1);
+/*!40000 ALTER TABLE `libros` ENABLE KEYS */;
+
 -- Volcando estructura para tabla gam-library.profiles
 DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE IF NOT EXISTS `profiles` (
@@ -92,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usuario` varchar(50) NOT NULL DEFAULT '0',
   `identificacion` varchar(50) NOT NULL DEFAULT '' COMMENT 'Cedula o numero de indentificacion preferido en la empresa',
   `password` varchar(50) NOT NULL DEFAULT '0',
-  `idrol` int(11) NOT NULL DEFAULT 0 COMMENT 'Relacional users_roles',
+  `idrol` int(11) NOT NULL DEFAULT 0 COMMENT 'Relaiconal profiles',
   `nombre1` varchar(50) NOT NULL DEFAULT '0',
   `nombre2` varchar(50) DEFAULT '0',
   `apellido1` varchar(50) NOT NULL DEFAULT '0',
@@ -110,13 +133,31 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `FKUsuarios_Roles` (`idrol`),
   KEY `nombrecompleto` (`nombre_completo`),
   KEY `usuario` (`usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla gam-library.users: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gam-library.users: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id_usuario`, `usuario`, `identificacion`, `password`, `idrol`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `nombre_completo`, `cargo`, `correo`, `telefono`, `extension`, `imagen_perfil`, `estado`, `logOne`) VALUES
-	(1, 'admin', '1031155506', '1NfRz+Q=', 1, 'Usuario', '', 'Administrador', '', 'Usuario  Administrador ', 'Administrador', 'proinsoft.desarrollo@gmail.com', '3195482079', '123', 'iconoUser.jpg', 1, 1);
+	(1, 'admin', '1031155506', '1NfRz+Q=', 1, 'Usuario', '', 'Administrador', '', 'Administrador', 'Administrador', 'proinsoft.desarrollo@gmail.com', '3195482079', '123', 'iconoUser.jpg', 1, 1),
+	(4, 'user', '', '6ObJ2A==', 2, '0', '0', '0', '0', 'Usuario de prestamos', '0', '0', '0', '', '0', 1, 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Volcando estructura para tabla gam-library.users_books
+DROP TABLE IF EXISTS `users_books`;
+CREATE TABLE IF NOT EXISTS `users_books` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_book` int(11) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Índice 2` (`id_book`,`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla gam-library.users_books: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `users_books` DISABLE KEYS */;
+INSERT INTO `users_books` (`id`, `id_book`, `id_user`) VALUES
+	(6, 26, 4),
+	(5, 27, 4);
+/*!40000 ALTER TABLE `users_books` ENABLE KEYS */;
 
 -- Volcando estructura para tabla gam-library.users_roles
 DROP TABLE IF EXISTS `users_roles`;
