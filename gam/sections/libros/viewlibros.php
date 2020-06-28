@@ -3,10 +3,10 @@ $action="create";
 if($_POST['action']=='create')
 {
 	$password = encrypt($_POST["password"]);
-	$campos  = "nombre_completo,usuario,password";
+	$campos  = "libro_name,autor_name,editorial_name";
 	$valores = "'$_POST[name]','$_POST[user]','$password'";
 	$alert=true;
-	if(add("users",$campos,$valores,0)){
+	if(add("libros",$campos,$valores,0)){
 		$type="success";
 		$message = "Registro guardado correctamente";
 	}
@@ -173,22 +173,12 @@ if($alert)
 					<input type="text" required="required" id="autor_li" name="autor_li" value="<?=$itemEdit["autorli"]?>" class="form-control">
 				</div>
 			</div>
-			
-		
-
-			<?php
-			if(!isset($_GET['item'])){
-			?>
-				<div class="form-group" >
-					<label class="col-lg-2 col-sm-2 control-label" for="asunto">Contraseña</label>
-					<div class="col-lg-8">
-						<input type="password" required="required" id="password" name="password" value="<?=$itemEdit["name_trivia"]?>" class="form-control">
-					</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="asunto">Editorial</label>
+				<div class="col-lg-8">
+					<input type="text" required="required" id="editorial_li" name="editorial_li" value="<?=$itemEdit["autorli"]?>" class="form-control">
 				</div>
-			<?php
-			}
-			?>
-
+			</div>
 			<br>
 			<div class="text-center">
 				<input type="submit" class="btn btn-primary" value="Guardar" name="crear" onclick="asignarAccion('crear');" />
@@ -196,7 +186,7 @@ if($alert)
 			<br>
 			
 			<input type="hidden" id="action" name="action" value="<?=$action?>" /> 
-			<input type="hidden" name="id_elemento" id="id_elemento" value="<?=$itemEdit["id_usuario"]?>">
+			<input type="hidden" name="id_elemento" id="id_elemento" value="<?=$itemEdit["id_libro"]?>">
 			<!--Aqui se almacena el ID del elemento que se este modificando-->
 		</form>
 	   </div>
@@ -207,10 +197,10 @@ if($alert)
 <!---------------------------------------------------------------- LISTADO ----------------------------------------------------->
 <?php
 //--------------------Query-------------------
-$id="id_usuario";
+$id="libros_id";
 $cols="*";
-$table="users";
-$where="1 ORDER BY nombre_completo ASC";
+$table="libros";
+$where="1 ORDER BY libro_name ASC";
 $result=query($table,$cols,$where,false);
 ?>
 <div class="box box-warning">
@@ -233,6 +223,7 @@ $result=query($table,$cols,$where,false);
 				<td class="text-center"><b>Genero Literario</b></td>
 				<td class="text-center"><b>Nombre</b></td>
 				<td class="text-center"><b>Autor</b></td>
+				<td class="text-center"><b>Editorial</b></td>
 				<td class="text-center"><b>Estado</b></td>
 				<td class="text-center"><b>Acciones</b></td>
 			 </tr>
@@ -244,8 +235,11 @@ $result=query($table,$cols,$where,false);
 					foreach ($result as $res) {
 					?>
 						<tr>
-							<td class="text-center"><?=$res["nombre_completo"]?></td>
-							<td class="text-center"><?=$res["usuario"]?></td>
+						    <td class="text-center"><?=$res["genero_lib"]?></td>
+							<td class="text-center"><?=$res["libro_name"]?></td>
+							<td class="text-center"><?=$res["autor_name"]?></td>
+							<td class="text-center"><?=$res["editorial_name"]?></td>
+
 							<?php
 							if($res["estado"]==0)
 							{
