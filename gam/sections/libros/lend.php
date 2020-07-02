@@ -10,7 +10,7 @@ if($_POST['accionEdit']=='desactivar')
 		$where = "id_user = '$id_user' AND id_book='$_POST[idElemento]'";
 		if(delete("users_books",$where,false)){
 			$type="success";
-			$message = "Libro devuelto corrctamente";
+			$message = "Libro devuelto correctamente";
 		}
 		else{
 			$type="danger";

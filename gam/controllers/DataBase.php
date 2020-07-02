@@ -2,7 +2,7 @@
 function connect()
 {
     //Local
-    $ms = new mysqli('localhost', 'root', '', 'gam-library');
+    $ms = new mysqli('mysql', 'root', 'root', 'gam');
     $ms->set_charset("utf8");
     return $ms;
 }
