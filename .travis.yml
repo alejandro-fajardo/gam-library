@@ -6,11 +6,9 @@ services:
 # Before
 before_install:
   - cd laradock
-  
   - sudo docker images
 install:
-  - sudo docker-compose up -d nginx mysql workspace
-after_install:
-  - docker images
+ # - sudo docker-compose up -d nginx mysql workspace
+  - sudo docker images
   
 
