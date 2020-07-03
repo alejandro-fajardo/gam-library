@@ -3,7 +3,7 @@ php:
   - 7.1
 services:
   - docker
-# Installing a newer Docker version
+# Up
 before_install:
   - docker version
   - docker-compose up -d nginx mysql workspace
