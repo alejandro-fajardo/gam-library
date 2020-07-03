@@ -7,9 +7,11 @@ services:
 # Before
 before_install:
   - docker version
-install:
-  #- docker-compose up -d nginx mysql workspace
   - sudo docker run hello-world
+  - sudo docker images
+#install:
+  #- docker-compose up -d nginx mysql workspace
+  
   #- sudo docker-compose up -d nginx mysql workspace
 
   
