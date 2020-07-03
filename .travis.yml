@@ -8,8 +8,8 @@ services:
 before_install:
   - docker version
   #- sudo docker run hello-world
-  - cd laradok/workspace
-  - sudo docker-compose up
+  - cd laradock
+  - sudo docker-compose up 
   - sudo docker images
 #install:
   #- sudo docker-compose up -d nginx mysql workspace
