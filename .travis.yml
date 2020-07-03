@@ -5,6 +5,6 @@ services:
   - docker
 # Up
 before_install:
-  - docker version
+  - docker images
   #- docker-compose up -d nginx mysql workspace
 
