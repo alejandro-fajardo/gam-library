@@ -3,8 +3,11 @@ php:
   - 7.1
 services:
   - docker
-# Up
+# Before
 before_install:
   - docker images
-  #- docker-compose up -d nginx mysql workspace
+install:
+  - docker-compose up -d nginx mysql workspace
+
+  
 
