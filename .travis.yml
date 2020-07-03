@@ -3,16 +3,14 @@ sudo: required
 services:
   - docker
 
-
 # Before
 before_install:
-  - docker version
-  #- sudo docker run hello-world
   - cd laradock
-  - sudo docker-compose up -d nginx mysql workspace
+  
   - sudo docker images
-#install:
-  #- sudo docker-compose up -d nginx mysql workspace
-
+install:
+  - sudo docker-compose up -d nginx mysql workspace
+after_install:
+  - docker images
   
 
