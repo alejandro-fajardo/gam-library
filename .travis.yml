@@ -7,7 +7,8 @@ services:
 # Before
 before_install:
   - docker version
-  - sudo docker run hello-world
+  #- sudo docker run hello-world
+  - cd laradok/workspace
   - sudo docker-compose up
   - sudo docker images
 #install:
